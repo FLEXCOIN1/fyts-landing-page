@@ -516,8 +516,11 @@
         </div>
     </footer>
 
+    <!-- ConvertKit Embed Script -->
+    <script async data-uid="3df40c2e5c" src="https://relentless-author-1017.kit.com/3df40c2e5c/index.js"></script>
+    
     <script>
-        // ConvertKit integration function
+        // Enhanced ConvertKit integration
         function storeEmail(email) {
             console.log('Starting email submission for:', email);
             
@@ -529,7 +532,56 @@
                 btn.style.opacity = '0.7';
             });
 
-            // Send to ConvertKit
+            // Use ConvertKit's embedded form functionality
+            if (window.ckFormData && window.ckFormData['3df40c2e5c']) {
+                // Use ConvertKit's form submission
+                const formData = new FormData();
+                formData.append('email', email);
+                formData.append('id', '3df40c2e5c');
+                
+                fetch('https://relentless-author-1017.kit.com/3df40c2e5c', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    console.log('ConvertKit response status:', response.status);
+                    return response.text();
+                })
+                .then(data => {
+                    console.log('Successfully subscribed via embed');
+                    
+                    // Show success state
+                    submitButtons.forEach(btn => {
+                        btn.textContent = 'Joined! ✓';
+                        btn.style.background = '#10b981';
+                        btn.style.opacity = '1';
+                    });
+                    
+                    // Show success message
+                    const successMessage = document.getElementById('success-message');
+                    if (successMessage) {
+                        successMessage.classList.remove('hidden');
+                    }
+                    
+                    // Update user count
+                    const countElement = document.getElementById('user-count');
+                    if (countElement) {
+                        const currentCount = parseInt(countElement.textContent.replace(',', ''));
+                        countElement.textContent = (currentCount + 1).toLocaleString();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error with embed submission:', error);
+                    fallbackToAPI(email, submitButtons);
+                });
+            } else {
+                // Fallback to direct API
+                fallbackToAPI(email, submitButtons);
+            }
+        }
+        
+        // Fallback API submission
+        function fallbackToAPI(email, submitButtons) {
             fetch('https://api.convertkit.com/v3/forms/8461710/subscribe', {
                 method: 'POST',
                 headers: {
@@ -541,65 +593,30 @@
                     tags: ['fyts-beta', 'landing-page']
                 })
             })
-            .then(response => {
-                console.log('ConvertKit response status:', response.status);
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
-                console.log('Successfully subscribed:', data);
+                console.log('Successfully subscribed via API fallback:', data);
                 
-                // Show success state
                 submitButtons.forEach(btn => {
                     btn.textContent = 'Joined! ✓';
                     btn.style.background = '#10b981';
                     btn.style.opacity = '1';
                 });
                 
-                // Show success message for main form
                 const successMessage = document.getElementById('success-message');
                 if (successMessage) {
                     successMessage.classList.remove('hidden');
                 }
-                
-                // Update user count
-                const countElement = document.getElementById('user-count');
-                if (countElement) {
-                    const currentCount = parseInt(countElement.textContent.replace(',', ''));
-                    countElement.textContent = (currentCount + 1).toLocaleString();
-                }
-                
-                // Track in browser for backup
-                const emails = JSON.parse(localStorage.getItem('fyts-emails') || '[]');
-                emails.push({
-                    email: email,
-                    timestamp: new Date().toISOString(),
-                    source: 'landing-page',
-                    convertkit_status: 'success'
-                });
-                localStorage.setItem('fyts-emails', JSON.stringify(emails));
-                
             })
             .catch(error => {
-                console.error('Error subscribing:', error);
+                console.error('Error with API fallback:', error);
                 
-                // Show error state
                 submitButtons.forEach(btn => {
                     btn.textContent = 'Try Again';
                     btn.disabled = false;
                     btn.style.background = '#ef4444';
                     btn.style.opacity = '1';
                 });
-                
-                // Still store locally if API fails
-                const emails = JSON.parse(localStorage.getItem('fyts-emails') || '[]');
-                emails.push({
-                    email: email,
-                    timestamp: new Date().toISOString(),
-                    source: 'landing-page',
-                    convertkit_status: 'failed',
-                    error: error.message
-                });
-                localStorage.setItem('fyts-emails', JSON.stringify(emails));
             });
         }
 

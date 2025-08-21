@@ -278,7 +278,7 @@
     </footer>
 
     <script>
-        // ConvertKit email collection function
+        // ConvertKit integration function
         function storeEmail(email) {
             // Show loading state
             const submitButtons = document.querySelectorAll('button[type="submit"]');
@@ -303,7 +303,7 @@
             .then(data => {
                 console.log('Successfully subscribed:', data);
                 
-                // Reset buttons to success state
+                // Show success state
                 submitButtons.forEach(btn => {
                     btn.textContent = 'Joined! ✓';
                     btn.style.background = '#10b981'; // Green success color
@@ -336,7 +336,7 @@
             .catch(error => {
                 console.error('Error subscribing:', error);
                 
-                // Reset buttons on error
+                // Show error state
                 submitButtons.forEach(btn => {
                     btn.textContent = 'Try Again';
                     btn.disabled = false;
@@ -355,7 +355,7 @@
             });
         }
 
-        // Email form handlers
+        // Form submission handlers
         const forms = ['waitlist-form', 'bottom-waitlist-form'];
         
         forms.forEach(formId => {
@@ -363,7 +363,7 @@
                 e.preventDefault();
                 const email = this.querySelector('input[type="email"]').value;
                 
-                // Call the ConvertKit function
+                // Call ConvertKit integration
                 storeEmail(email);
             });
         });
@@ -382,7 +382,7 @@
             });
         });
 
-        // Simple animation on scroll
+        // Animation on scroll
         function animateOnScroll() {
             const elements = document.querySelectorAll('.workout-card');
             const observer = new IntersectionObserver((entries) => {

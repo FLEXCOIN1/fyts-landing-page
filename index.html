@@ -4,519 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FYTS - Earn Crypto While Getting Fit</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #1f2937;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .crypto-glow {
-            box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
-        }
-        
-        .workout-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background: white;
-            padding: 32px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .workout-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            text-align: center;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary {
-            background: #fbbf24;
-            color: #1f2937;
-        }
-        
-        .btn-primary:hover {
-            background: #f59e0b;
-            transform: scale(1.05);
-        }
-        
-        .btn-secondary {
-            background: #2563eb;
-            color: white;
-        }
-        
-        .btn-secondary:hover {
-            background: #1d4ed8;
-        }
-        
-        .text-center { text-align: center; }
-        .text-white { color: white; }
-        .text-yellow { color: #fbbf24; }
-        .text-green { color: #10b981; }
-        .text-blue { color: #3b82f6; }
-        .text-gray { color: #6b7280; }
-        .text-gray-dark { color: #374151; }
-        
-        .mb-4 { margin-bottom: 16px; }
-        .mb-6 { margin-bottom: 24px; }
-        .mb-8 { margin-bottom: 32px; }
-        .mb-16 { margin-bottom: 64px; }
-        .mt-4 { margin-top: 16px; }
-        .py-4 { padding: 16px 0; }
-        .py-8 { padding: 32px 0; }
-        .py-20 { padding: 80px 0; }
-        .px-4 { padding: 0 16px; }
-        .px-6 { padding: 0 24px; }
-        .px-8 { padding: 0 32px; }
-        .p-8 { padding: 32px; }
-        
-        .flex { display: flex; }
-        .flex-col { flex-direction: column; }
-        .items-center { align-items: center; }
-        .justify-between { justify-content: space-between; }
-        .justify-center { justify-content: center; }
-        .space-x-6 > * + * { margin-left: 24px; }
-        .space-x-8 > * + * { margin-left: 32px; }
-        .space-y-1 > * + * { margin-top: 4px; }
-        .space-y-4 > * + * { margin-top: 16px; }
-        
-        .grid { display: grid; }
-        .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-        .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
-        .gap-4 { gap: 16px; }
-        .gap-8 { gap: 32px; }
-        
-        .bg-gray-50 { background: #f9fafb; }
-        .bg-gray-900 { background: #111827; }
-        .bg-black { background: #000; }
-        .bg-white { background: white; }
-        
-        .rounded-lg { border-radius: 8px; }
-        .rounded-2xl { border-radius: 16px; }
-        .rounded-full { border-radius: 50%; }
-        
-        .shadow-lg { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
-        
-        .text-2xl { font-size: 24px; font-weight: bold; }
-        .text-4xl { font-size: 36px; font-weight: bold; }
-        .text-5xl { font-size: 48px; font-weight: bold; }
-        .text-6xl { font-size: 60px; font-weight: bold; }
-        .text-xl { font-size: 20px; }
-        .text-sm { font-size: 14px; }
-        
-        .font-bold { font-weight: 700; }
-        .font-semibold { font-weight: 600; }
-        
-        .w-20 { width: 80px; }
-        .h-20 { height: 80px; }
-        .max-w-2xl { max-width: 672px; }
-        .max-w-4xl { max-width: 896px; }
-        .max-w-md { max-width: 448px; }
-        .mx-auto { margin: 0 auto; }
-        
-        .hidden { display: none; }
-        
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            max-width: 448px;
-            margin: 0 auto;
-        }
-        
-        .form-input {
-            flex: 1;
-            padding: 12px 16px;
-            border-radius: 8px;
-            border: 1px solid #d1d5db;
-            font-size: 16px;
-            color: #1f2937;
-        }
-        
-        .form-input:focus {
-            outline: none;
-            border-color: #fbbf24;
-            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
-        }
-        
-        .success-message {
-            margin-top: 16px;
-            padding: 16px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid #10b981;
-            border-radius: 8px;
-            color: #065f46;
-        }
-        
-        .hero-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 32px;
-        }
-        
-        .step-circle {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            margin: 0 auto 24px auto;
-        }
-        
-        .step-1 { background: #2563eb; }
-        .step-2 { background: #10b981; }
-        .step-3 { background: #7c3aed; }
-        
-        .reward-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 32px;
-        }
-        
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-        
-        .nav-link {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-link:hover {
-            color: rgba(59, 130, 246, 0.8);
-        }
-        
-        .social-link {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .social-link:hover {
-            color: #3b82f6;
-        }
-        
-        .border-t {
-            border-top: 1px solid #374151;
-        }
-        
-        .pt-8 { padding-top: 32px; }
-        
-        @media (min-width: 768px) {
-            .form-group {
-                flex-direction: row;
-            }
-            
-            .grid-cols-3 {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .text-6xl {
-                font-size: 72px;
-            }
-        }
-        
-        @media (max-width: 767px) {
-            .text-5xl {
-                font-size: 36px;
-            }
-            
-            .text-6xl {
-                font-size: 42px;
-            }
-            
-            .grid-cols-3 {
-                grid-template-columns: 1fr;
-            }
-            
-            .space-x-6 > * + * {
-                margin-left: 0;
-                margin-top: 16px;
-            }
-            
-            .flex-mobile {
-                flex-direction: column;
-            }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 100vh; }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; text-align: center; }
+        h1 { font-size: 3em; margin-bottom: 20px; }
+        .highlight { color: #fbbf24; }
+        p { font-size: 1.2em; margin-bottom: 30px; }
+        .form-box { background: rgba(255,255,255,0.1); padding: 40px; border-radius: 20px; margin: 40px 0; }
+        .form-row { display: flex; gap: 15px; max-width: 400px; margin: 0 auto; }
+        input { flex: 1; padding: 15px; border: none; border-radius: 8px; font-size: 16px; }
+        button { padding: 15px 30px; background: #fbbf24; color: black; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        button:hover { background: #f59e0b; }
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin: 60px 0; }
+        .feature { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; }
+        .icon { font-size: 3em; margin-bottom: 15px; }
+        @media (max-width: 768px) { 
+            .form-row { flex-direction: column; }
+            h1 { font-size: 2em; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="gradient-bg text-white">
-        <div class="container py-4">
-            <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold">
-                    🏋️ FYTS
+    <div class="container">
+        <h1>Get Fit. Earn Crypto. <span class="highlight">Level Up Your Life.</span></h1>
+        <p>Turn every workout into cryptocurrency rewards. Track your fitness, compete with friends, and earn tokens you can actually use.</p>
+        
+        <div class="form-box">
+            <h2>🚀 Join the Beta Waitlist</h2>
+            <p>Be among the first 1,000 users to earn crypto rewards for your workouts</p>
+            
+            <form name="fyts-signup" method="POST" data-netlify="true">
+                <input type="hidden" name="form-name" value="fyts-signup">
+                <div class="form-row">
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                    <button type="submit">Join Beta</button>
                 </div>
-                <nav class="space-x-6 flex-mobile">
-                    <a href="#features" class="nav-link">Features</a>
-                    <a href="#how-it-works" class="nav-link">How It Works</a>
-                    <a href="#rewards" class="nav-link">Rewards</a>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="gradient-bg text-white py-20">
-        <div class="container text-center">
-            <div class="max-w-4xl mx-auto">
-                <h1 class="text-5xl font-bold mb-6">
-                    Get Fit. Earn Crypto. 
-                    <span class="text-yellow">Level Up Your Life.</span>
-                </h1>
-                <p class="text-xl mb-8">
-                    Turn every workout into cryptocurrency rewards. Track your fitness, compete with friends, and earn tokens you can actually use.
-                </p>
-                <div class="hero-bg crypto-glow">
-                    <h3 class="text-2xl font-semibold mb-4">🚀 Join the Beta Waitlist</h3>
-                    <p class="mb-6">Be among the first 1,000 users to earn crypto rewards for your workouts</p>
-                    
-                    <!-- SIMPLE MAILTO FORM -->
-                    <form name="contact" method="POST" data-netlify="true" class="form-group">
-                        <input type="hidden" name="form-name" value="contact" />
-                        <input 
-                            type="email" 
-                            name="email"
-                            placeholder="Enter your email" 
-                            required
-                            class="form-input"
-                        >
-                        <button 
-                            type="submit"
-                            class="btn btn-primary"
-                        >
-                            Join Beta
-                        </button>
-                    </form>
-                    
-                    <p class="text-sm mt-4">
-                        ✓ No spam, ever  ✓ Early access guaranteed  ✓ Free beta tokens
-                    </p>
-                </div>
-                <div class="flex justify-center space-x-8 text-sm flex-mobile">
-                    <div class="flex items-center">
-                        👥 <span id="user-count">2,847</span> users signed up
-                    </div>
-                    <div class="flex items-center">
-                        🪙 $50K+ in rewards earned
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="py-20 bg-gray-50">
-        <div class="container">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-dark mb-4">Why FYTS Changes Everything</h2>
-                <p class="text-xl text-gray max-w-2xl mx-auto">
-                    We're not just another fitness app. We're building the future where your health directly rewards your wealth.
-                </p>
-            </div>
-            <div class="grid grid-cols-3 gap-8">
-                <div class="workout-card">
-                    <div class="feature-icon">🏃‍♂️</div>
-                    <h3 class="text-2xl font-semibold mb-4">Smart Tracking</h3>
-                    <p class="text-gray mb-4">
-                        Advanced AI tracks your heart rate, distance, calories, and effort level. No cheating - only real workouts earn tokens.
-                    </p>
-                    <ul class="text-sm text-gray space-y-1">
-                        <li>• GPS-verified routes</li>
-                        <li>• Heart rate validation</li>
-                        <li>• Video proof for strength training</li>
-                    </ul>
-                </div>
-                <div class="workout-card">
-                    <div class="feature-icon">🪙</div>
-                    <h3 class="text-2xl font-semibold mb-4">Crypto Rewards</h3>
-                    <p class="text-gray mb-4">
-                        Earn FYTS tokens that have real value. Exchange for cash, buy merchandise, or unlock premium features.
-                    </p>
-                    <ul class="text-sm text-gray space-y-1">
-                        <li>• Instant token rewards</li>
-                        <li>• Convert to major cryptocurrencies</li>
-                        <li>• Exchange for fiat money</li>
-                    </ul>
-                </div>
-                <div class="workout-card">
-                    <div class="feature-icon">🏆</div>
-                    <h3 class="text-2xl font-semibold mb-4">Social Competition</h3>
-                    <p class="text-gray mb-4">
-                        Compete with friends, join challenges, and climb leaderboards. Make fitness social and rewarding.
-                    </p>
-                    <ul class="text-sm text-gray space-y-1">
-                        <li>• Weekly group challenges</li>
-                        <li>• Global leaderboards</li>
-                        <li>• Team competitions</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section id="how-it-works" class="py-20 bg-white">
-        <div class="container">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-dark mb-4">How FYTS Works</h2>
-                <p class="text-xl text-gray">Simple as 1-2-3. Start earning today.</p>
-            </div>
-            <div class="grid grid-cols-3 gap-8 max-w-4xl mx-auto">
-                <div class="text-center">
-                    <div class="step-circle step-1">1</div>
-                    <h3 class="text-xl font-semibold mb-4">Work Out</h3>
-                    <p class="text-gray">Go for a run, lift weights, do yoga - any physical activity counts. Our AI tracks your effort and validates your workout.</p>
-                </div>
-                <div class="text-center">
-                    <div class="step-circle step-2">2</div>
-                    <h3 class="text-xl font-semibold mb-4">Earn Tokens</h3>
-                    <p class="text-gray">Get FYTS tokens based on calories burned, heart rate, distance, and workout intensity. Higher effort = more rewards.</p>
-                </div>
-                <div class="text-center">
-                    <div class="step-circle step-3">3</div>
-                    <h3 class="text-xl font-semibold mb-4">Cash Out</h3>
-                    <p class="text-gray">Exchange tokens for cash, crypto, merchandise, or premium app features. Your fitness journey pays for itself.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Rewards Showcase -->
-    <section id="rewards" class="py-20 gradient-bg text-white">
-        <div class="container">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">Your Workouts Have Value</h2>
-                <p class="text-xl">See what your fitness routine could earn</p>
-            </div>
-            <div class="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="reward-card">
-                    <h3 class="text-2xl font-semibold mb-6">💰 Earning Examples</h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-center py-4">
-                            <span>30-min morning run</span>
-                            <span class="text-yellow font-semibold">25 FYTS (~$2.50)</span>
-                        </div>
-                        <div class="flex justify-between items-center py-4">
-                            <span>1-hour gym session</span>
-                            <span class="text-yellow font-semibold">40 FYTS (~$4.00)</span>
-                        </div>
-                        <div class="flex justify-between items-center py-4">
-                            <span>Weekly challenge win</span>
-                            <span class="text-yellow font-semibold">100 FYTS (~$10.00)</span>
-                        </div>
-                        <div class="flex justify-between items-center py-4">
-                            <span class="font-semibold">Monthly total (active user)</span>
-                            <span class="text-green font-bold">500+ FYTS (~$50+)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="reward-card">
-                    <h3 class="text-2xl font-semibold mb-6">🛍️ Redeem For</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="text-center p-4 rounded-lg bg-white bg-opacity-10">
-                            <div class="text-2xl mb-2">💸</div>
-                            <div class="text-sm">Cash Withdrawal</div>
-                        </div>
-                        <div class="text-center p-4 rounded-lg bg-white bg-opacity-10">
-                            <div class="text-2xl mb-2">👟</div>
-                            <div class="text-sm">Fitness Gear</div>
-                        </div>
-                        <div class="text-center p-4 rounded-lg bg-white bg-opacity-10">
-                            <div class="text-2xl mb-2">🏋️</div>
-                            <div class="text-sm">Gym Memberships</div>
-                        </div>
-                        <div class="text-center p-4 rounded-lg bg-white bg-opacity-10">
-                            <div class="text-2xl mb-2">📱</div>
-                            <div class="text-sm">Premium Features</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Final CTA -->
-    <section class="py-20 bg-gray-900 text-white">
-        <div class="container text-center">
-            <h2 class="text-4xl font-bold mb-4">Ready to Turn Sweat into Crypto?</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto">
-                Join thousands of fitness enthusiasts already earning while they exercise. Beta launches in 30 days.
-            </p>
-            <form name="contact-bottom" method="POST" data-netlify="true" class="form-group mb-8">
-                <input type="hidden" name="form-name" value="contact-bottom" />
-                <input 
-                    type="email"
-                    name="email" 
-                    placeholder="Enter your email" 
-                    required
-                    class="form-input"
-                >
-                <button 
-                    type="submit"
-                    class="btn btn-secondary"
-                >
-                    Get Early Access
-                </button>
             </form>
-            <p class="text-sm text-gray">Beta users get 100 free FYTS tokens to start • No credit card required</p>
+            
+            <p style="font-size: 0.9em; margin-top: 20px;">
+                ✓ No spam, ever  ✓ Early access guaranteed  ✓ Free beta tokens
+            </p>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="bg-black text-white py-8">
-        <div class="container">
-            <div class="flex justify-between items-center flex-mobile">
-                <div class="text-xl font-bold mb-4">
-                    🏋️ FYTS
-                </div>
-                <div class="flex space-x-6">
-                    <a href="#" class="social-link">🐦 Twitter</a>
-                    <a href="#" class="social-link">📸 Instagram</a>
-                    <a href="#" class="social-link">💬 Discord</a>
-                </div>
+        <div class="features">
+            <div class="feature">
+                <div class="icon">🏃‍♂️</div>
+                <h3>Smart Tracking</h3>
+                <p>Advanced AI tracks your heart rate, distance, calories, and effort level. Only real workouts earn tokens.</p>
             </div>
-            <div class="border-t mt-8 pt-8 text-center text-gray text-sm">
-                <p>&copy; 2025 FYTS. All rights reserved. • <a href="#" class="social-link">Privacy Policy</a> • <a href="#" class="social-link">Terms of Service</a></p>
+            <div class="feature">
+                <div class="icon">🪙</div>
+                <h3>Crypto Rewards</h3>
+                <p>Earn FYTS tokens that have real value. Exchange for cash, buy merchandise, or unlock premium features.</p>
+            </div>
+            <div class="feature">
+                <div class="icon">🏆</div>
+                <h3>Social Competition</h3>
+                <p>Compete with friends, join challenges, and climb leaderboards. Make fitness social and rewarding.</p>
             </div>
         </div>
-    </footer>
+
+        <div style="margin-top: 60px;">
+            <h2>Ready to Turn Sweat into Crypto?</h2>
+            <p>Beta launches in 30 days. Join now for early access!</p>
+            
+            <form name="fyts-signup-bottom" method="POST" data-netlify="true" style="margin-top: 30px;">
+                <input type="hidden" name="form-name" value="fyts-signup-bottom">
+                <div class="form-row">
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                    <button type="submit">Get Early Access</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

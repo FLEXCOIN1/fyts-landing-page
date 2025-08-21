@@ -278,7 +278,84 @@
     </footer>
 
     <script>
-        // Email collection functionality
+        // ConvertKit email collection function
+        function storeEmail(email) {
+            // Show loading state
+            const submitButtons = document.querySelectorAll('button[type="submit"]');
+            submitButtons.forEach(btn => {
+                btn.textContent = 'Joining...';
+                btn.disabled = true;
+            });
+
+            // Send to ConvertKit
+            fetch('https://api.convertkit.com/v3/forms/8461710/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    api_key: 'FT0RU9vBlm7qtlrvziHOgg',
+                    email: email,
+                    tags: ['fyts-beta', 'landing-page']
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Successfully subscribed:', data);
+                
+                // Reset buttons to success state
+                submitButtons.forEach(btn => {
+                    btn.textContent = 'Joined! ✓';
+                    btn.style.background = '#10b981'; // Green success color
+                });
+                
+                // Show success message for main form
+                const successMessage = document.getElementById('success-message');
+                if (successMessage) {
+                    successMessage.classList.remove('hidden');
+                }
+                
+                // Update user count
+                const countElement = document.getElementById('user-count');
+                if (countElement) {
+                    const currentCount = parseInt(countElement.textContent.replace(',', ''));
+                    countElement.textContent = (currentCount + 1).toLocaleString();
+                }
+                
+                // Optional: Track in browser for backup
+                const emails = JSON.parse(localStorage.getItem('fyts-emails') || '[]');
+                emails.push({
+                    email: email,
+                    timestamp: new Date().toISOString(),
+                    source: 'landing-page',
+                    convertkit_status: 'success'
+                });
+                localStorage.setItem('fyts-emails', JSON.stringify(emails));
+                
+            })
+            .catch(error => {
+                console.error('Error subscribing:', error);
+                
+                // Reset buttons on error
+                submitButtons.forEach(btn => {
+                    btn.textContent = 'Try Again';
+                    btn.disabled = false;
+                    btn.style.background = '#ef4444'; // Red error color
+                });
+                
+                // Fallback: still store locally if API fails
+                const emails = JSON.parse(localStorage.getItem('fyts-emails') || '[]');
+                emails.push({
+                    email: email,
+                    timestamp: new Date().toISOString(),
+                    source: 'landing-page',
+                    convertkit_status: 'failed'
+                });
+                localStorage.setItem('fyts-emails', JSON.stringify(emails));
+            });
+        }
+
+        // Email form handlers
         const forms = ['waitlist-form', 'bottom-waitlist-form'];
         
         forms.forEach(formId => {
@@ -286,45 +363,10 @@
                 e.preventDefault();
                 const email = this.querySelector('input[type="email"]').value;
                 
-                // Simulate email collection (replace with your actual service)
-                console.log('Email collected:', email);
-                
-                // Show success message
-                if (formId === 'waitlist-form') {
-                    document.getElementById('success-message').classList.remove('hidden');
-                    this.style.display = 'none';
-                }
-                
-                // Update user count (simulate growth)
-                const countElement = document.getElementById('user-count');
-                if (countElement) {
-                    const currentCount = parseInt(countElement.textContent.replace(',', ''));
-                    countElement.textContent = (currentCount + 1).toLocaleString();
-                }
-                
-                // Store email (you'll connect this to ConvertKit/Mailchimp)
+                // Call the ConvertKit function
                 storeEmail(email);
             });
         });
-
-        function storeEmail(email) {
-            // This is where you'll integrate with ConvertKit, Mailchimp, or your backend
-            // For now, we'll store in localStorage for demo purposes
-            const emails = JSON.parse(localStorage.getItem('fyts-emails') || '[]');
-            emails.push({
-                email: email,
-                timestamp: new Date().toISOString(),
-                source: 'landing-page'
-            });
-            localStorage.setItem('fyts-emails', JSON.stringify(emails));
-            
-            // Send to your backend/email service
-            // fetch('/api/subscribe', {
-            //     method: 'POST',
-            //     headers: {'Content-Type': 'application/json'},
-            //     body: JSON.stringify({email})
-            // });
-        }
 
         // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

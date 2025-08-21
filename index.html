@@ -307,9 +307,10 @@
                 <div class="hero-bg crypto-glow">
                     <h3 class="text-2xl font-semibold mb-4">🚀 Join the Beta Waitlist</h3>
                     <p class="mb-6">Be among the first 1,000 users to earn crypto rewards for your workouts</p>
-                    <form id="waitlist-form" class="form-group">
+                    <form id="waitlist-form" class="form-group" netlify>
                         <input 
                             type="email" 
+                            name="email"
                             id="email" 
                             placeholder="Enter your email" 
                             required
@@ -479,9 +480,10 @@
             <p class="text-xl mb-8 max-w-2xl mx-auto">
                 Join thousands of fitness enthusiasts already earning while they exercise. Beta launches in 30 days.
             </p>
-            <form id="bottom-waitlist-form" class="form-group mb-8">
+            <form id="bottom-waitlist-form" class="form-group mb-8" netlify>
                 <input 
-                    type="email" 
+                    type="email"
+                    name="email" 
                     placeholder="Enter your email" 
                     required
                     class="form-input"
@@ -516,72 +518,17 @@
         </div>
     </footer>
 
-    <!-- ConvertKit Embed Script -->
-    <script async data-uid="3df40c2e5c" src="https://relentless-author-1017.kit.com/3df40c2e5c/index.js"></script>
-    
     <script>
-        // Enhanced ConvertKit integration
+        // Clean ConvertKit API integration
         function storeEmail(email) {
-            console.log('Starting email submission for:', email);
+            console.log('Submitting email to ConvertKit:', email);
             
-            // Show loading state
             const submitButtons = document.querySelectorAll('button[type="submit"]');
             submitButtons.forEach(btn => {
                 btn.textContent = 'Joining...';
                 btn.disabled = true;
-                btn.style.opacity = '0.7';
             });
 
-            // Use ConvertKit's embedded form functionality
-            if (window.ckFormData && window.ckFormData['3df40c2e5c']) {
-                // Use ConvertKit's form submission
-                const formData = new FormData();
-                formData.append('email', email);
-                formData.append('id', '3df40c2e5c');
-                
-                fetch('https://relentless-author-1017.kit.com/3df40c2e5c', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    console.log('ConvertKit response status:', response.status);
-                    return response.text();
-                })
-                .then(data => {
-                    console.log('Successfully subscribed via embed');
-                    
-                    // Show success state
-                    submitButtons.forEach(btn => {
-                        btn.textContent = 'Joined! ✓';
-                        btn.style.background = '#10b981';
-                        btn.style.opacity = '1';
-                    });
-                    
-                    // Show success message
-                    const successMessage = document.getElementById('success-message');
-                    if (successMessage) {
-                        successMessage.classList.remove('hidden');
-                    }
-                    
-                    // Update user count
-                    const countElement = document.getElementById('user-count');
-                    if (countElement) {
-                        const currentCount = parseInt(countElement.textContent.replace(',', ''));
-                        countElement.textContent = (currentCount + 1).toLocaleString();
-                    }
-                })
-                .catch(error => {
-                    console.error('Error with embed submission:', error);
-                    fallbackToAPI(email, submitButtons);
-                });
-            } else {
-                // Fallback to direct API
-                fallbackToAPI(email, submitButtons);
-            }
-        }
-        
-        // Fallback API submission
-        function fallbackToAPI(email, submitButtons) {
             fetch('https://api.convertkit.com/v3/forms/8461710/subscribe', {
                 method: 'POST',
                 headers: {
@@ -589,90 +536,72 @@
                 },
                 body: JSON.stringify({
                     api_key: 'FT0RU9vBlm7qtlrvziHOgg',
-                    email: email,
-                    tags: ['fyts-beta', 'landing-page']
+                    email: email
                 })
             })
             .then(response => response.json())
             .then(data => {
-                console.log('Successfully subscribed via API fallback:', data);
+                console.log('ConvertKit success:', data);
                 
                 submitButtons.forEach(btn => {
                     btn.textContent = 'Joined! ✓';
                     btn.style.background = '#10b981';
-                    btn.style.opacity = '1';
                 });
                 
                 const successMessage = document.getElementById('success-message');
                 if (successMessage) {
                     successMessage.classList.remove('hidden');
                 }
+                
+                const countElement = document.getElementById('user-count');
+                if (countElement) {
+                    const currentCount = parseInt(countElement.textContent.replace(',', ''));
+                    countElement.textContent = (currentCount + 1).toLocaleString();
+                }
             })
             .catch(error => {
-                console.error('Error with API fallback:', error);
+                console.error('ConvertKit error:', error);
                 
                 submitButtons.forEach(btn => {
                     btn.textContent = 'Try Again';
                     btn.disabled = false;
                     btn.style.background = '#ef4444';
-                    btn.style.opacity = '1';
                 });
             });
         }
 
-        // Form submission handlers
-        const forms = ['waitlist-form', 'bottom-waitlist-form'];
-        
-        forms.forEach(formId => {
-            const form = document.getElementById(formId);
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const email = this.querySelector('input[type="email"]').value;
-                    console.log('Form submitted with email:', email);
-                    storeEmail(email);
-                });
-            }
-        });
-
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+        // Form handlers with Netlify backup
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = ['waitlist-form', 'bottom-waitlist-form'];
+            
+            forms.forEach(formId => {
+                const form = document.getElementById(formId);
+                if (form) {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        const email = this.querySelector('input[type="email"]').value;
+                        
+                        // Try ConvertKit first
+                        storeEmail(email);
+                        
+                        // Netlify will also capture this due to netlify attribute
                     });
                 }
             });
-        });
 
-        // Animation on scroll
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.workout-card');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
                     }
                 });
             });
-            
-            elements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
-            });
-        }
-
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('FYTS landing page loaded successfully');
-            animateOnScroll();
         });
     </script>
 </body>

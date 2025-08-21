@@ -307,11 +307,13 @@
                 <div class="hero-bg crypto-glow">
                     <h3 class="text-2xl font-semibold mb-4">🚀 Join the Beta Waitlist</h3>
                     <p class="mb-6">Be among the first 1,000 users to earn crypto rewards for your workouts</p>
-                    <form id="waitlist-form" class="form-group" netlify>
+                    
+                    <!-- SIMPLE MAILTO FORM -->
+                    <form name="contact" method="POST" data-netlify="true" class="form-group">
+                        <input type="hidden" name="form-name" value="contact" />
                         <input 
                             type="email" 
                             name="email"
-                            id="email" 
                             placeholder="Enter your email" 
                             required
                             class="form-input"
@@ -323,9 +325,7 @@
                             Join Beta
                         </button>
                     </form>
-                    <div id="success-message" class="success-message hidden">
-                        <p>🎉 Welcome to FYTS! Check your email for next steps.</p>
-                    </div>
+                    
                     <p class="text-sm mt-4">
                         ✓ No spam, ever  ✓ Early access guaranteed  ✓ Free beta tokens
                     </p>
@@ -480,7 +480,8 @@
             <p class="text-xl mb-8 max-w-2xl mx-auto">
                 Join thousands of fitness enthusiasts already earning while they exercise. Beta launches in 30 days.
             </p>
-            <form id="bottom-waitlist-form" class="form-group mb-8" netlify>
+            <form name="contact-bottom" method="POST" data-netlify="true" class="form-group mb-8">
+                <input type="hidden" name="form-name" value="contact-bottom" />
                 <input 
                     type="email"
                     name="email" 
@@ -517,93 +518,5 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Clean ConvertKit API integration
-        function storeEmail(email) {
-            console.log('Submitting email to ConvertKit:', email);
-            
-            const submitButtons = document.querySelectorAll('button[type="submit"]');
-            submitButtons.forEach(btn => {
-                btn.textContent = 'Joining...';
-                btn.disabled = true;
-            });
-
-            fetch('https://api.convertkit.com/v3/forms/8461710/subscribe', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams({
-                    'api_key': 'FT0RU9vBlm7qtlrvziHOgg',
-                    'email': email,
-                    'first_name': ''
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('ConvertKit success:', data);
-                
-                submitButtons.forEach(btn => {
-                    btn.textContent = 'Joined! ✓';
-                    btn.style.background = '#10b981';
-                });
-                
-                const successMessage = document.getElementById('success-message');
-                if (successMessage) {
-                    successMessage.classList.remove('hidden');
-                }
-                
-                const countElement = document.getElementById('user-count');
-                if (countElement) {
-                    const currentCount = parseInt(countElement.textContent.replace(',', ''));
-                    countElement.textContent = (currentCount + 1).toLocaleString();
-                }
-            })
-            .catch(error => {
-                console.error('ConvertKit error:', error);
-                
-                submitButtons.forEach(btn => {
-                    btn.textContent = 'Try Again';
-                    btn.disabled = false;
-                    btn.style.background = '#ef4444';
-                });
-            });
-        }
-
-        // Form handlers with Netlify backup
-        document.addEventListener('DOMContentLoaded', function() {
-            const forms = ['waitlist-form', 'bottom-waitlist-form'];
-            
-            forms.forEach(formId => {
-                const form = document.getElementById(formId);
-                if (form) {
-                    form.addEventListener('submit', function(e) {
-                        e.preventDefault();
-                        const email = this.querySelector('input[type="email"]').value;
-                        
-                        // Try ConvertKit first
-                        storeEmail(email);
-                        
-                        // Netlify will also capture this due to netlify attribute
-                    });
-                }
-            });
-
-            // Smooth scrolling
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>

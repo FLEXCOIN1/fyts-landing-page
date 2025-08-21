@@ -532,11 +532,12 @@
             fetch('https://api.convertkit.com/v3/forms/8461710/subscribe', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: JSON.stringify({
-                    api_key: 'FT0RU9vBlm7qtlrvziHOgg',
-                    email: email
+                body: new URLSearchParams({
+                    'api_key': 'FT0RU9vBlm7qtlrvziHOgg',
+                    'email': email,
+                    'first_name': ''
                 })
             })
             .then(response => response.json())

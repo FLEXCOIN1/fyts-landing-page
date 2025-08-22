@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FYTS - Earn Crypto While Getting Fit</title>
+    <title>FYTS - Premium Fitness Rewards Platform</title>
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7NVC59RC11"></script>
@@ -14,7 +14,7 @@
         gtag('config', 'G-7NVC59RC11');
     </script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -23,306 +23,359 @@
         }
         
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #1f2937;
+            color: #0a0a0a;
+            background: #ffffff;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 32px;
         }
         
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* Premium Dark Theme */
+        .dark-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
         }
         
-        .crypto-glow {
-            box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+        .gold-accent {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        .workout-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background: white;
-            padding: 32px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        .premium-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            transition: all 0.4s ease;
         }
         
-        .workout-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        .premium-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 215, 0, 0.3);
         }
         
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            text-align: center;
-            cursor: pointer;
+        .luxury-button {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
             border: none;
+            padding: 18px 36px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
             transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
         }
         
-        .btn-primary {
-            background: #fbbf24;
-            color: #1f2937;
-        }
-        
-        .btn-primary:hover {
-            background: #f59e0b;
-            transform: scale(1.05);
-        }
-        
-        .btn-secondary {
-            background: #2563eb;
-            color: white;
-        }
-        
-        .btn-secondary:hover {
-            background: #1d4ed8;
+        .luxury-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 48px rgba(255, 215, 0, 0.4);
+            background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
         }
         
         .text-center { text-align: center; }
-        .text-white { color: white; }
-        .text-yellow { color: #fbbf24; }
-        .text-green { color: #10b981; }
-        .text-blue { color: #3b82f6; }
-        .text-gray { color: #6b7280; }
-        .text-gray-dark { color: #374151; }
+        .text-white { color: #ffffff; }
+        .text-gray { color: #a0a0a0; }
+        .text-dark { color: #0a0a0a; }
         
         .mb-4 { margin-bottom: 16px; }
         .mb-6 { margin-bottom: 24px; }
         .mb-8 { margin-bottom: 32px; }
         .mb-16 { margin-bottom: 64px; }
-        .mt-4 { margin-top: 16px; }
-        .py-4 { padding: 16px 0; }
-        .py-8 { padding: 32px 0; }
-        .py-20 { padding: 80px 0; }
-        .px-4 { padding: 0 16px; }
-        .px-6 { padding: 0 24px; }
+        .mb-24 { margin-bottom: 96px; }
+        .mt-8 { margin-top: 32px; }
+        .py-6 { padding: 24px 0; }
+        .py-16 { padding: 64px 0; }
+        .py-24 { padding: 96px 0; }
         .px-8 { padding: 0 32px; }
-        .p-8 { padding: 32px; }
+        .p-12 { padding: 48px; }
         
         .flex { display: flex; }
         .flex-col { flex-direction: column; }
         .items-center { align-items: center; }
         .justify-between { justify-content: space-between; }
         .justify-center { justify-content: center; }
-        .space-x-6 > * + * { margin-left: 24px; }
         .space-x-8 > * + * { margin-left: 32px; }
-        .space-y-1 > * + * { margin-top: 4px; }
-        .space-y-4 > * + * { margin-top: 16px; }
+        .space-y-6 > * + * { margin-top: 24px; }
         
         .grid { display: grid; }
-        .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
         .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
-        .gap-4 { gap: 16px; }
+        .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
         .gap-8 { gap: 32px; }
+        .gap-12 { gap: 48px; }
         
-        .bg-gray-50 { background: #f9fafb; }
-        .bg-gray-900 { background: #111827; }
-        .bg-black { background: #000; }
-        .bg-white { background: white; }
-        
-        .rounded-lg { border-radius: 8px; }
         .rounded-2xl { border-radius: 16px; }
-        .rounded-full { border-radius: 50%; }
+        .rounded-3xl { border-radius: 24px; }
         
-        .shadow-lg { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
+        .text-7xl { font-size: 4.5rem; font-weight: 900; line-height: 1.1; }
+        .text-6xl { font-size: 3.75rem; font-weight: 800; line-height: 1.1; }
+        .text-5xl { font-size: 3rem; font-weight: 700; line-height: 1.2; }
+        .text-4xl { font-size: 2.25rem; font-weight: 700; line-height: 1.2; }
+        .text-3xl { font-size: 1.875rem; font-weight: 600; line-height: 1.3; }
+        .text-2xl { font-size: 1.5rem; font-weight: 600; line-height: 1.3; }
+        .text-xl { font-size: 1.25rem; font-weight: 500; line-height: 1.4; }
+        .text-lg { font-size: 1.125rem; font-weight: 400; line-height: 1.5; }
+        .text-sm { font-size: 0.875rem; font-weight: 400; }
         
-        .text-2xl { font-size: 24px; font-weight: bold; }
-        .text-4xl { font-size: 36px; font-weight: bold; }
-        .text-5xl { font-size: 48px; font-weight: bold; }
-        .text-6xl { font-size: 60px; font-weight: bold; }
-        .text-xl { font-size: 20px; }
-        .text-sm { font-size: 14px; }
-        
+        .font-light { font-weight: 300; }
+        .font-medium { font-weight: 500; }
         .font-bold { font-weight: 700; }
-        .font-semibold { font-weight: 600; }
+        .font-black { font-weight: 900; }
         
-        .w-20 { width: 80px; }
-        .h-20 { height: 80px; }
-        .max-w-2xl { max-width: 672px; }
-        .max-w-4xl { max-width: 896px; }
-        .max-w-md { max-width: 448px; }
-        .mx-auto { margin: 0 auto; }
+        .max-w-4xl { max-width: 56rem; margin: 0 auto; }
+        .max-w-6xl { max-width: 72rem; margin: 0 auto; }
         
-        .hidden { display: none; }
-        
-        .hero-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 32px;
+        /* Premium Navigation */
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
         }
         
+        .nav-link:hover {
+            color: #FFD700;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section Styling */
+        .hero-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Premium Form Styling */
+        .premium-form-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
+        }
+        
+        .form-wrapper {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Feature Cards */
+        .feature-card {
+            background: #ffffff;
+            padding: 48px;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Step Circles */
         .step-circle {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            margin: 0 auto 24px auto;
+            color: #000;
+            font-size: 2rem;
+            font-weight: 900;
+            margin: 0 auto 32px auto;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            box-shadow: 0 12px 24px rgba(255, 215, 0, 0.3);
         }
         
-        .step-1 { background: #2563eb; }
-        .step-2 { background: #10b981; }
-        .step-3 { background: #7c3aed; }
+        /* Rewards Section */
+        .rewards-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+        }
         
         .reward-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 32px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 24px;
+            padding: 48px;
         }
         
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
+        .earning-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .nav-link {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            transition: color 0.3s ease;
+        .earning-row:last-child {
+            border-bottom: none;
         }
         
-        .nav-link:hover {
-            color: rgba(59, 130, 246, 0.8);
+        .earning-amount {
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Footer */
+        .footer-bg {
+            background: #000000;
         }
         
         .social-link {
-            color: white;
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
         
         .social-link:hover {
-            color: #3b82f6;
+            color: #FFD700;
         }
         
-        .border-t {
-            border-top: 1px solid #374151;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .text-7xl { font-size: 2.5rem; }
+            .text-6xl { font-size: 2rem; }
+            .grid-cols-3 { grid-template-columns: 1fr; }
+            .grid-cols-2 { grid-template-columns: 1fr; }
+            .space-x-8 > * + * { margin-left: 0; margin-top: 16px; }
+            .premium-form-container { padding: 24px; }
+            .feature-card { padding: 32px; }
+            .p-12 { padding: 24px; }
         }
         
-        .pt-8 { padding-top: 32px; }
-        
-        /* Google Form Styling */
-        .form-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 32px;
-            margin: 32px 0;
-            box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+        /* Smooth Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
         
-        .form-wrapper {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        @media (min-width: 768px) {
-            .grid-cols-3 {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .text-6xl {
-                font-size: 72px;
-            }
-        }
-        
-        @media (max-width: 767px) {
-            .text-5xl {
-                font-size: 36px;
-            }
-            
-            .text-6xl {
-                font-size: 42px;
-            }
-            
-            .grid-cols-3 {
-                grid-template-columns: 1fr;
-            }
-            
-            .space-x-6 > * + * {
-                margin-left: 0;
-                margin-top: 16px;
-            }
-            
-            .flex-mobile {
-                flex-direction: column;
-            }
-            
-            .form-container {
-                padding: 20px;
-            }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="gradient-bg text-white">
-        <div class="container py-4">
+    <header class="dark-bg py-6">
+        <div class="container">
             <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold">
-                    🏋️ FYTS
+                <div class="text-2xl font-black">
+                    <span class="gold-accent">FYTS</span>
                 </div>
-                <nav class="space-x-6 flex-mobile">
+                <nav class="space-x-8 flex items-center">
                     <a href="#features" class="nav-link">Features</a>
                     <a href="#how-it-works" class="nav-link">How It Works</a>
                     <a href="#rewards" class="nav-link">Rewards</a>
+                    <button class="luxury-button">Join Beta</button>
                 </nav>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="gradient-bg text-white py-20">
-        <div class="container text-center">
-            <div class="max-w-4xl mx-auto">
-                <h1 class="text-5xl font-bold mb-6">
-                    Get Fit. Earn Crypto. 
-                    <span class="text-yellow">Level Up Your Life.</span>
+    <section class="hero-bg py-24">
+        <div class="container hero-content">
+            <div class="max-w-6xl text-center">
+                <h1 class="text-7xl font-black mb-8 text-white">
+                    Fitness Meets
+                    <span class="gold-accent">Fortune</span>
                 </h1>
-                <p class="text-xl mb-8">
-                    Turn every workout into cryptocurrency rewards. Track your fitness, compete with friends, and earn tokens you can actually use.
+                <p class="text-2xl text-gray mb-16 font-light max-w-4xl">
+                    Transform every workout into cryptocurrency rewards. Premium fitness tracking that pays you for excellence.
                 </p>
                 
-                <div class="form-container crypto-glow">
-                    <h3 class="text-2xl font-semibold mb-4">🚀 Join the Beta Waitlist</h3>
-                    <p class="mb-6">Be among the first 1,000 users to earn crypto rewards for your workouts</p>
+                <div class="premium-form-container max-w-4xl mx-auto mb-24">
+                    <h3 class="text-3xl font-bold mb-6 text-white">Join The Elite Beta Program</h3>
+                    <p class="text-xl text-gray mb-8">Exclusive access for the first 1,000 premium members</p>
                     
                     <div class="form-wrapper">
                         <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScTPu5reWcekn4uer3iBmNYX8MKUFggpijcCxb3eNZHegA99w/viewform?embedded=true" 
                                 width="640" height="374" frameborder="0" marginheight="0" marginwidth="0"
-                                style="border-radius: 10px; width: 100%; max-width: 640px; margin: 0 auto; display: block;">
+                                style="border-radius: 16px; width: 100%; max-width: 640px; margin: 0 auto; display: block;">
                             Loading…
                         </iframe>
                     </div>
                     
-                    <p class="text-sm mt-4">
-                        ✓ No spam, ever  ✓ Early access guaranteed  ✓ Free beta tokens
-                    </p>
+                    <div class="flex justify-center space-x-8 mt-8 text-sm text-gray">
+                        <span>✓ Verified Rewards System</span>
+                        <span>✓ Premium Support</span>
+                        <span>✓ Founder Benefits</span>
+                    </div>
                 </div>
                 
-                <div class="flex justify-center space-x-8 text-sm flex-mobile">
+                <div class="flex justify-center space-x-12 text-sm text-gray">
                     <div class="flex items-center">
-                        👥 <span id="user-count">2,847</span> users signed up
+                        <span class="gold-accent font-bold text-xl mr-2">5,847</span>
+                        <span>Elite Members</span>
                     </div>
                     <div class="flex items-center">
-                        🪙 $50K+ in rewards earned
+                        <span class="gold-accent font-bold text-xl mr-2">$247K+</span>
+                        <span>Rewards Distributed</span>
                     </div>
                 </div>
             </div>
@@ -330,129 +383,135 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 bg-gray-50">
+    <section id="features" class="py-24" style="background: #fafafa;">
         <div class="container">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-dark mb-4">Why FYTS Changes Everything</h2>
-                <p class="text-xl text-gray max-w-2xl mx-auto">
-                    We're not just another fitness app. We're building the future where your health directly rewards your wealth.
+            <div class="text-center mb-24">
+                <h2 class="text-6xl font-black text-dark mb-6">Premium <span class="gold-accent">Performance</span></h2>
+                <p class="text-2xl text-gray max-w-4xl mx-auto font-light">
+                    Military-grade tracking technology meets luxury rewards platform. Excellence recognized, effort rewarded.
                 </p>
             </div>
-            <div class="grid grid-cols-3 gap-8">
-                <div class="workout-card">
-                    <div class="feature-icon">🏃‍♂️</div>
-                    <h3 class="text-2xl font-semibold mb-4">Smart Tracking</h3>
-                    <p class="text-gray mb-4">
-                        Advanced AI tracks your heart rate, distance, calories, and effort level. No cheating - only real workouts earn tokens.
+            
+            <div class="grid grid-cols-3 gap-12 max-w-6xl mx-auto">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="text-3xl font-bold mb-6 text-dark">Precision Tracking</h3>
+                    <p class="text-lg text-gray mb-6 font-light">
+                        Advanced biometric monitoring with military-grade GPS accuracy. Heart rate variability, power output, and effort optimization.
                     </p>
-                    <ul class="text-sm text-gray space-y-1">
-                        <li>• GPS-verified routes</li>
-                        <li>• Heart rate validation</li>
-                        <li>• Video proof for strength training</li>
-                    </ul>
+                    <div class="space-y-6">
+                        <div class="text-sm text-gray">• Satellite-grade GPS precision</div>
+                        <div class="text-sm text-gray">• Real-time biometric analysis</div>
+                        <div class="text-sm text-gray">• Anti-fraud AI verification</div>
+                    </div>
                 </div>
-                <div class="workout-card">
-                    <div class="feature-icon">🪙</div>
-                    <h3 class="text-2xl font-semibold mb-4">Crypto Rewards</h3>
-                    <p class="text-gray mb-4">
-                        Earn FYTS tokens that have real value. Exchange for cash, buy merchandise, or unlock premium features.
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💎</div>
+                    <h3 class="text-3xl font-bold mb-6 text-dark">Premium Rewards</h3>
+                    <p class="text-lg text-gray mb-6 font-light">
+                        Institutional-grade cryptocurrency rewards with instant liquidity. Your performance portfolio, tokenized and tradeable.
                     </p>
-                    <ul class="text-sm text-gray space-y-1">
-                        <li>• Instant token rewards</li>
-                        <li>• Convert to major cryptocurrencies</li>
-                        <li>• Exchange for fiat money</li>
-                    </ul>
+                    <div class="space-y-6">
+                        <div class="text-sm text-gray">• Instant crypto settlements</div>
+                        <div class="text-sm text-gray">• Multi-chain compatibility</div>
+                        <div class="text-sm text-gray">• Premium marketplace access</div>
+                    </div>
                 </div>
-                <div class="workout-card">
+                
+                <div class="feature-card fade-in">
                     <div class="feature-icon">🏆</div>
-                    <h3 class="text-2xl font-semibold mb-4">Social Competition</h3>
-                    <p class="text-gray mb-4">
-                        Compete with friends, join challenges, and climb leaderboards. Make fitness social and rewarding.
+                    <h3 class="text-3xl font-bold mb-6 text-dark">Elite Community</h3>
+                    <p class="text-lg text-gray mb-6 font-light">
+                        Connect with top performers globally. Exclusive challenges, premium partnerships, and luxury experiences.
                     </p>
-                    <ul class="text-sm text-gray space-y-1">
-                        <li>• Weekly group challenges</li>
-                        <li>• Global leaderboards</li>
-                        <li>• Team competitions</li>
-                    </ul>
+                    <div class="space-y-6">
+                        <div class="text-sm text-gray">• Global leaderboard rankings</div>
+                        <div class="text-sm text-gray">• Exclusive brand partnerships</div>
+                        <div class="text-sm text-gray">• VIP event access</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- How It Works -->
-    <section id="how-it-works" class="py-20 bg-white">
+    <section id="how-it-works" class="py-24 dark-bg">
         <div class="container">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-dark mb-4">How FYTS Works</h2>
-                <p class="text-xl text-gray">Simple as 1-2-3. Start earning today.</p>
+            <div class="text-center mb-24">
+                <h2 class="text-6xl font-black text-white mb-6">Effortless <span class="gold-accent">Excellence</span></h2>
+                <p class="text-2xl text-gray font-light">Three steps to transform your fitness into financial returns</p>
             </div>
-            <div class="grid grid-cols-3 gap-8 max-w-4xl mx-auto">
-                <div class="text-center">
-                    <div class="step-circle step-1">1</div>
-                    <h3 class="text-xl font-semibold mb-4">Work Out</h3>
-                    <p class="text-gray">Go for a run, lift weights, do yoga - any physical activity counts. Our AI tracks your effort and validates your workout.</p>
+            
+            <div class="grid grid-cols-3 gap-12 max-w-6xl mx-auto">
+                <div class="text-center fade-in">
+                    <div class="step-circle">1</div>
+                    <h3 class="text-2xl font-bold mb-6 text-white">Train Elite</h3>
+                    <p class="text-lg text-gray font-light">Execute your training protocol with our precision tracking technology monitoring every metric that matters.</p>
                 </div>
-                <div class="text-center">
-                    <div class="step-circle step-2">2</div>
-                    <h3 class="text-xl font-semibold mb-4">Earn Tokens</h3>
-                    <p class="text-gray">Get FYTS tokens based on calories burned, heart rate, distance, and workout intensity. Higher effort = more rewards.</p>
+                <div class="text-center fade-in">
+                    <div class="step-circle">2</div>
+                    <h3 class="text-2xl font-bold mb-6 text-white">Earn Premium</h3>
+                    <p class="text-lg text-gray font-light">Receive instant cryptocurrency rewards calculated from biometric data, effort analysis, and performance optimization.</p>
                 </div>
-                <div class="text-center">
-                    <div class="step-circle step-3">3</div>
-                    <h3 class="text-xl font-semibold mb-4">Cash Out</h3>
-                    <p class="text-gray">Exchange tokens for cash, crypto, merchandise, or premium app features. Your fitness journey pays for itself.</p>
+                <div class="text-center fade-in">
+                    <div class="step-circle">3</div>
+                    <h3 class="text-2xl font-bold mb-6 text-white">Live Luxury</h3>
+                    <p class="text-lg text-gray font-light">Convert earnings to premium experiences, luxury gear, or liquid cryptocurrency through our exclusive marketplace.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Rewards Showcase -->
-    <section id="rewards" class="py-20 gradient-bg text-white">
+    <section id="rewards" class="py-24 rewards-bg">
         <div class="container">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">Your Workouts Have Value</h2>
-                <p class="text-xl">See what your fitness routine could earn</p>
+            <div class="text-center mb-24">
+                <h2 class="text-6xl font-black text-white mb-6">Premium <span class="gold-accent">Returns</span></h2>
+                <p class="text-2xl text-gray font-light">Your performance portfolio, quantified and rewarded</p>
             </div>
-            <div class="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
+            
+            <div class="grid grid-cols-2 gap-12 max-w-6xl mx-auto">
                 <div class="reward-card">
-                    <h3 class="text-2xl font-semibold mb-6">💰 Earning Examples</h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-center py-4">
-                            <span>30-min morning run</span>
-                            <span class="text-yellow font-semibold">25 FYTS (~$2.50)</span>
+                    <h3 class="text-3xl font-bold mb-8 text-white">Elite Earning Potential</h3>
+                    <div class="space-y-6">
+                        <div class="earning-row">
+                            <span class="text-lg text-white">Premium training session (60min)</span>
+                            <span class="earning-amount text-xl">$12.50 FYTS</span>
                         </div>
-                        <div class="flex justify-between items-center py-4">
-                            <span>1-hour gym session</span>
-                            <span class="text-yellow font-semibold">40 FYTS (~$4.00)</span>
+                        <div class="earning-row">
+                            <span class="text-lg text-white">Elite endurance workout</span>
+                            <span class="earning-amount text-xl">$18.75 FYTS</span>
                         </div>
-                        <div class="flex justify-between items-center py-4">
-                            <span>Weekly challenge win</span>
-                            <span class="text-yellow font-semibold">100 FYTS (~$10.00)</span>
+                        <div class="earning-row">
+                            <span class="text-lg text-white">Competition challenge victory</span>
+                            <span class="earning-amount text-xl">$75.00 FYTS</span>
                         </div>
-                        <div class="flex justify-between items-center py-4">
-                            <span class="font-semibold">Monthly total (active user)</span>
-                            <span class="text-green font-bold">500+ FYTS (~$50+)</span>
+                        <div class="earning-row">
+                            <span class="text-white font-bold text-lg">Monthly elite member</span>
+                            <span class="earning-amount text-2xl font-black">$500+ FYTS</span>
                         </div>
                     </div>
                 </div>
+                
                 <div class="reward-card">
-                    <h3 class="text-2xl font-semibold mb-6">🛍️ Redeem For</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="text-center p-4 rounded-lg bg-white bg-opacity-10">
-                            <div class="text-2xl mb-2">💸</div>
-                            <div class="text-sm">Cash Withdrawal</div>
+                    <h3 class="text-3xl font-bold mb-8 text-white">Luxury Marketplace</h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center p-6 rounded-2xl" style="background: rgba(255, 215, 0, 0.1);">
+                            <div class="text-3xl mb-4">💰</div>
+                            <div class="text-sm text-white">Instant Liquidity</div>
                         </div>
-                        <div class="text-center p-4 rounded-lg bg-white bg-opacity-10">
-                            <div class="text-2xl mb-2">👟</div>
-                            <div class="text-sm">Fitness Gear</div>
+                        <div class="text-center p-6 rounded-2xl" style="background: rgba(255, 215, 0, 0.1);">
+                            <div class="text-3xl mb-4">🏆</div>
+                            <div class="text-sm text-white">Premium Gear</div>
                         </div>
-                        <div class="text-center p-4 rounded-lg bg-white bg-opacity-10">
-                            <div class="text-2xl mb-2">🏋️</div>
-                            <div class="text-sm">Gym Memberships</div>
+                        <div class="text-center p-6 rounded-2xl" style="background: rgba(255, 215, 0, 0.1);">
+                            <div class="text-3xl mb-4">✈️</div>
+                            <div class="text-sm text-white">Elite Experiences</div>
                         </div>
-                        <div class="text-center p-4 rounded-lg bg-white bg-opacity-10">
-                            <div class="text-2xl mb-2">📱</div>
-                            <div class="text-sm">Premium Features</div>
+                        <div class="text-center p-6 rounded-2xl" style="background: rgba(255, 215, 0, 0.1);">
+                            <div class="text-3xl mb-4">💎</div>
+                            <div class="text-sm text-white">Exclusive Access</div>
                         </div>
                     </div>
                 </div>
@@ -461,41 +520,42 @@
     </section>
 
     <!-- Final CTA -->
-    <section class="py-20 bg-gray-900 text-white">
+    <section class="py-24" style="background: #fafafa;">
         <div class="container text-center">
-            <h2 class="text-4xl font-bold mb-4">Ready to Turn Sweat into Crypto?</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto">
-                Join thousands of fitness enthusiasts already earning while they exercise. Beta launches in 30 days.
+            <h2 class="text-6xl font-black text-dark mb-6">Ready For <span class="gold-accent">Elite Status?</span></h2>
+            <p class="text-2xl text-gray mb-16 max-w-4xl mx-auto font-light">
+                Join the exclusive beta program. Limited to 1,000 founding members. Elite access launches in 30 days.
             </p>
             
-            <div class="form-container" style="background: rgba(255, 255, 255, 0.1); max-width: 600px; margin: 0 auto;">
+            <div class="premium-form-container max-w-4xl mx-auto" style="background: rgba(0, 0, 0, 0.05); border: 1px solid rgba(255, 215, 0, 0.3);">
                 <div class="form-wrapper">
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScTPu5reWcekn4uer3iBmNYX8MKUFggpijcCxb3eNZHegA99w/viewform?embedded=true" 
                             width="640" height="374" frameborder="0" marginheight="0" marginwidth="0"
-                            style="border-radius: 10px; width: 100%; max-width: 640px; margin: 0 auto; display: block;">
+                            style="border-radius: 16px; width: 100%; max-width: 640px; margin: 0 auto; display: block;">
                         Loading…
                     </iframe>
                 </div>
             </div>
             
-            <p class="text-sm text-gray mt-6">Beta users get 100 free FYTS tokens to start • No credit card required</p>
+            <p class="text-sm text-gray mt-8">Founding members receive 500 premium FYTS tokens • Exclusive marketplace access • Zero fees for life</p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black text-white py-8">
+    <footer class="footer-bg py-16">
         <div class="container">
-            <div class="flex justify-between items-center flex-mobile">
-                <div class="text-xl font-bold mb-4">
-                    🏋️ FYTS
+            <div class="flex justify-between items-center mb-12">
+                <div class="text-3xl font-black">
+                    <span class="gold-accent">FYTS</span>
                 </div>
-                <div class="flex space-x-6">
-                    <a href="#" class="social-link">🐦 Twitter</a>
-                    <a href="#" class="social-link">📸 Instagram</a>
-                    <a href="#" class="social-link">💬 Discord</a>
+                <div class="flex space-x-8">
+                    <a href="#" class="social-link">Twitter</a>
+                    <a href="#" class="social-link">Instagram</a>
+                    <a href="#" class="social-link">Discord</a>
                 </div>
             </div>
-            <div class="border-t mt-8 pt-8 text-center text-gray text-sm">
+            
+            <div style="border-top: 1px solid #333; padding-top: 32px;" class="text-center text-gray text-sm">
                 <p>&copy; 2025 FYTS. All rights reserved. • <a href="#" class="social-link">Privacy Policy</a> • <a href="#" class="social-link">Terms of Service</a></p>
             </div>
         </div>
@@ -516,29 +576,27 @@
             });
         });
 
-        // Animation on scroll
+        // Scroll animations
         function animateOnScroll() {
-            const elements = document.querySelectorAll('.workout-card');
+            const elements = document.querySelectorAll('.fade-in');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.classList.add('visible');
                     }
                 });
+            }, {
+                threshold: 0.1
             });
             
             elements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 observer.observe(el);
             });
         }
 
         // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('FYTS landing page loaded successfully');
+            console.log('FYTS Premium landing page loaded');
             animateOnScroll();
         });
     </script>
